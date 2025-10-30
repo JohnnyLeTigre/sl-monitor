@@ -2,9 +2,9 @@ name: SL Monitor Linje 29
 
 on:
   schedule:
-    # Kör var 10:e minut
+   
     - cron: '*/10 * * * *'
-  workflow_dispatch: # Tillåt manuell körning
+  workflow_dispatch:
 
 jobs:
   monitor:

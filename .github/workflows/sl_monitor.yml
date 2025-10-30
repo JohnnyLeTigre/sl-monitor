@@ -21,7 +21,7 @@ jobs:
     
     - name: Install dependencies
       run: |
-        pip install requests gtfs-realtime-bindings
+        pip install requests
     
     - name: Run SL Monitor
       env:
@@ -30,7 +30,7 @@ jobs:
         EMAIL_TO: ${{ secrets.EMAIL_TO }}
         EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
       run: |
-        python sl_monitor_gtfs.py
+        python sl_monitor_simple.py
     
     - name: Commit state file
       run: |

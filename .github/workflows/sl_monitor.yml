@@ -1,0 +1,41 @@
+name: SL Monitor Linje 29
+
+on:
+  schedule:
+    # Kör var 10:e minut
+    - cron: '*/10 * * * *'
+  workflow_dispatch: # Tillåt manuell körning
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install requests gtfs-realtime-bindings
+    
+    - name: Run SL Monitor
+      env:
+        SL_API_KEY: ${{ secrets.SL_API_KEY }}
+        EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+        EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+      run: |
+        python sl_monitor_gtfs.py
+    
+    - name: Commit state file
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add sl_state.json sl_monitor.log || true
+        git commit -m "Update state [skip ci]" || true
+        git push || true

@@ -1,0 +1,5 @@
+requests>=2.31.0
+gtfs-realtime-bindings>=1.0.0
+beautifulsoup4>=4.12.0
+selenium>=4.15.0  # Om du behöver hantera JavaScript-renderad innehåll
+win10toast>=0.9; sys_platform == 'win32'  # För Windows-notiser

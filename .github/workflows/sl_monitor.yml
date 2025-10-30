@@ -30,7 +30,7 @@ jobs:
         EMAIL_TO: ${{ secrets.EMAIL_TO }}
         EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
       run: |
-        python sl_monitor_simple.py
+        python sl_monitor_ultra_simple.py
     
     - name: Commit state file
       run: |
